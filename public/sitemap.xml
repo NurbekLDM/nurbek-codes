@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <!-- Asosiy sahifa -->
+    <url>
+        <loc>https://nurbek.codes/</loc>
+        <lastmod>2025-02-15</lastmod>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- About (Haqida) sahifa -->
+    <url>
+        <loc>https://nurbek.codes/about</loc>
+        <lastmod>2025-02-10</lastmod>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Xizmatlar sahifa -->
+    <url>
+        <loc>https://nurbek.codes/services</loc>
+        <lastmod>2025-02-05</lastmod>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Portfolio sahifa -->
+    <url>
+        <loc>https://nurbek.codes/portfolio</loc>
+        <lastmod>2025-02-05</lastmod>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Blog sahifa -->
+    <url>
+        <loc>https://nurbek.codes/blog</loc>
+        <lastmod>2025-02-01</lastmod>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- Bog‘lanish sahifa -->
+    <url>
+        <loc>https://nurbek.codes/contact</loc>
+        <lastmod>2025-01-28</lastmod>
+        <priority>0.6</priority>
+    </url>
+
+</urlset>
