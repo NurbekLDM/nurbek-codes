@@ -5,7 +5,8 @@ function App() {
   return (
     <>
       <div>
-        <HeroSection />       
+        <HeroSection />    
+        <h1>Nurbek codes</h1>
       </div>
     </>
   );
