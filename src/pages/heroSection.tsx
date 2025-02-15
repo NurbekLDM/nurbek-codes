@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 export default function HeroSection() {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
