@@ -1,6 +1,7 @@
 import Navbar from './Navbar';
 import Head from 'next/head';
 import { RetroGrid } from '../components/RetroGrids';
+import Script from 'next/script'; // Script modulini import qilamiz
 
 const Layout = ({ children }) => {
   return (
@@ -47,6 +48,24 @@ const Layout = ({ children }) => {
         <meta name="twitter:image" content="https://nurbek.codes/nurbek-logo.svg" />
         <link rel="icon" href="assets/nurbek-logo.svg" />
       </Head>
+      
+      {/* Google Analytics Script */}
+      <Script
+        strategy="afterInteractive"
+        src="https://www.googletagmanager.com/gtag/js?id=G-KFR95C2EHJ"
+      />
+      <Script
+        id="google-analytics"
+        strategy="afterInteractive"
+      >
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-KFR95C2EHJ');
+        `}
+      </Script>
+
       <Navbar />
       <main className="relative h-screen">
         <RetroGrid />
