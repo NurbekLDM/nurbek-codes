@@ -6,7 +6,7 @@ export default function AboutPage() {
 return (
   <div>
      <Head>
-        <title>About Us</title>
+        <title>About me</title>
         <meta name="description" content="This is the about page" />
       </Head>
     <div className='h-screen  max-h-96 overflow-hidden'>

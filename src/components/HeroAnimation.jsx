@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import React from 'react';
+import { AnimatedBeamDemo } from './AnimatedSocial';
 
 const TypingMachine = ({ text, speed = 70, fontSize = 'text-2xl', color = 'text-gray-800', fontStyle = '' }) => {
   const [displayedText, setDisplayedText] = useState('');
@@ -61,6 +62,7 @@ function HeroAnimation() {
   return (
     <div className="h-screen mx-auto text-center sm:py-20">
       <ExampleUsageTypingMachine />
+      <AnimatedBeamDemo />
     </div>
   );
 }

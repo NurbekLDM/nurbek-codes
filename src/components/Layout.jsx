@@ -48,7 +48,7 @@ const Layout = ({ children }) => {
         <link rel="icon" href="assets/nurbek-logo.svg" />
       </Head>
       <Navbar />
-      <main className="relative">
+      <main className="relative h-screen">
         <RetroGrid />
         <div className="relative z-10">
           {children}

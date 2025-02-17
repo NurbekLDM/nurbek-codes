@@ -24,7 +24,7 @@ export default function Navbar() {
                             </p>
                             <button
                                 type="button"
-                                className="inline-flex hover:cursor-pointer items-center p-2 ml-3 text-sm text-gray-500 rounded-lg sm:block lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                                className="inline-flex hover:cursor-pointer items-center p-2 ml-3 text-sm text-gray-500 rounded-lg sm:block lg:hidden  "
                                 onClick={toggleNavbar}
                                 aria-controls="navbar-default"
                                 aria-expanded={isNavOpen}
@@ -47,31 +47,31 @@ export default function Navbar() {
                         </div>
                         <div
                             className={`${isNavOpen ? "block" : "hidden"
-                                } w-full lg:flex lg:pl-11 max-lg:mt-1 max-lg:h-content max-lg:overflow-y-auto`}
+                                } w-full lg:flex  z-20 lg:pl-11 max-lg:mt-1 max-lg:h-content max-lg:overflow-y-auto`}
                             id="navbar"
                         >
                             <ul className="flex gap-10 lg:items-center lg:justify-center flex-col max-lg:gap-6 max-lg:pt-4 max-lg:mb-4 lg:mt-0 lg:flex-row lg:mx-auto">
-                                <li>
+                                <li onClick={()=> setIsNavOpen(false)}>
                                     <Link href="/" className="nav-link hover:cursor-pointer mb-2 block lg:mr-6 md:mb-0 lg:text-left text-base text-gray-500 font-medium transition-all duration-500 hover:text-gray-900">
                                         Home
                                     </Link>
                                 </li>
-                                <li>
+                                <li onClick={()=> setIsNavOpen(false)}>
                                     <Link href="/about" className="nav-link hover:cursor-pointer mb-2 block lg:mr-6 md:mb-0 lg:text-left text-base text-gray-500 font-medium transition-all duration-500 hover:text-gray-900">
                                         About me
                                     </Link>
                                 </li>
-                                <li>
-                                    <p className="nav-link hover:cursor-pointer mb-2 block lg:mr-6 md:mb-0 lg:text-left text-base text-gray-500 font-medium transition-all duration-500 hover:text-gray-900">
+                                <li onClick={()=> setIsNavOpen(false)}>
+                                    <Link href="/projects" className="nav-link hover:cursor-pointer mb-2 block lg:mr-6 md:mb-0 lg:text-left text-base text-gray-500 font-medium transition-all duration-500 hover:text-gray-900">
                                         Projects
-                                    </p>
+                                    </Link>
                                 </li>
-                                <li>
+                                <li onClick={()=> setIsNavOpen(false)}>
                                     <p className="nav-link hover:cursor-pointer mb-2 block lg:mr-6 md:mb-0 lg:text-left text-base text-gray-500 font-medium transition-all duration-500 hover:text-gray-900">
                                         Features
                                     </p>
                                 </li>
-                                <li>
+                                <li onClick={()=> setIsNavOpen(false)}>
                                     <p className="nav-link hover:cursor-pointer mb-2 block lg:mr-6 md:mb-0 lg:text-left text-base text-gray-500 font-medium transition-all duration-500 hover:text-gray-900">
                                         Blog
                                     </p>
