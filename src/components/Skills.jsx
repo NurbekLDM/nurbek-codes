@@ -1,15 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
+import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from "framer-motion";
-import Lottie from "react-lottie";
 
-interface Rectangle {
-  id: number;
-  lottieUrl: string;
-  title: string;
-  description: string;
-}
+// Dynamically import Lottie without server-side rendering
+const Lottie = dynamic(() => import('react-lottie'), { ssr: false });
 
-const rectangles: Rectangle[] = [
+const rectangles = [
   { id: 1, lottieUrl: "https://res.cloudinary.com/dl2adjye7/raw/upload/v1716532587/stack_zrrg4m.json", title: "Skill 1", description: "Description for skill 1" },
   { id: 2, lottieUrl: "https://res.cloudinary.com/dl2adjye7/raw/upload/v1716532587/stack_zrrg4m.json", title: "Skill 2", description: "Description for skill 2" },
   { id: 3, lottieUrl: "https://res.cloudinary.com/dl2adjye7/raw/upload/v1716532587/stack_zrrg4m.json", title: "Skill 3", description: "Description for skill 3" },
@@ -17,8 +13,8 @@ const rectangles: Rectangle[] = [
   { id: 5, lottieUrl: "https://res.cloudinary.com/dl2adjye7/raw/upload/v1716532587/stack_zrrg4m.json", title: "Skill 5", description: "Description for skill 5" },
 ];
 
-const NotifTemplate: React.FC<Rectangle> = ({ lottieUrl, title, description }) => {
-  const [animationData, setAnimationData] = useState<Record<string, unknown> | null>(null);
+const NotifTemplate = ({ lottieUrl, title, description }) => {
+  const [animationData, setAnimationData] = useState(null);
   const [isStopped, setIsStopped] = useState(true);
   const [isPaused, setIsPaused] = useState(true);
 
@@ -64,11 +60,11 @@ const NotifTemplate: React.FC<Rectangle> = ({ lottieUrl, title, description }) =
   );
 };
 
-const CardPilling: React.FC<{ loop?: boolean }> = ({ loop = true }) => {
-  const [visibleRectangles, setVisibleRectangles] = useState<Rectangle[]>([]);
+const CardPilling = ({ loop = true }) => {
+  const [visibleRectangles, setVisibleRectangles] = useState([]);
   const [triggerExit, setTriggerExit] = useState(false);
   const [loopCount, setLoopCount] = useState(0);
-  const rectRef = useRef<HTMLDivElement | null>(null);
+  const rectRef = useRef(null);
   const [rectHeight, setRectHeight] = useState(0);
   const margin = 20;
 
@@ -125,12 +121,14 @@ const CardPilling: React.FC<{ loop?: boolean }> = ({ loop = true }) => {
   );
 };
 
-const App: React.FC = () => {
+const Skills = () => {
   return (
-    <div className="h-screen mt-24 text-center">
-      <CardPilling />
-    </div>
+
+      <div className="h-screen mt-24 text-center">
+        <CardPilling />
+      </div>
+
   );
 };
 
-export default App;
+export default Skills;

@@ -1,15 +1,8 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import React from 'react';
 
-interface TypingMachineProps {
-  text: string;
-  speed?: number;
-  fontSize?: string;
-  color?: string;
-  fontStyle?: string;
-}
-
-const TypingMachine: React.FC<TypingMachineProps> = ({ text, speed = 70, fontSize = 'text-2xl', color = 'text-gray-800', fontStyle = '' }) => {
+const TypingMachine = ({ text, speed = 70, fontSize = 'text-2xl', color = 'text-gray-800', fontStyle = '' }) => {
   const [displayedText, setDisplayedText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
@@ -28,7 +21,7 @@ const TypingMachine: React.FC<TypingMachineProps> = ({ text, speed = 70, fontSiz
   }, [currentIndex, text, speed]);
 
   return (
-    <div className="flex items-center  h-[fit-content]">
+    <div className="flex items-center h-[fit-content]">
       <motion.div
         className={`font-mono ${fontSize} ${color} ${fontStyle}`}
         initial={{ opacity: 0 }}
@@ -58,19 +51,18 @@ const TypingMachine: React.FC<TypingMachineProps> = ({ text, speed = 70, fontSiz
 
 const ExampleUsageTypingMachine = () => {
   return (
-      <div className=" flex flex-col items-center sm:w-full w-[300px] justify-center space-y-4 text-center">
-        <TypingMachine text="Nurbek Aliqo'ziyev -  Full-stack Developer" speed={70} fontSize="text-sm sm:text-4xl" color="text-black" fontStyle="" />
-      </div>
+    <div className="flex flex-col items-center mx-auto sm:w-full w-[300px] justify-center space-y-4 text-center">
+      <TypingMachine text="Nurbek Aliqo'ziyev - Full-stack Developer" speed={70} fontSize="text-2xl sm:text-4xl" color="text-black" fontStyle="" />
+    </div>
   );
 };
 
-function App() {
+function HeroAnimation() {
   return (
-    <div className="h-screen text-center py-20">
+    <div className="h-screen mx-auto text-center sm:py-20">
       <ExampleUsageTypingMachine />
     </div>
   );
 }
 
-export default App;
-          
+export default HeroAnimation;
