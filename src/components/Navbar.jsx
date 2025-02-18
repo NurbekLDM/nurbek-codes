@@ -67,7 +67,7 @@ export default function Navbar() {
                                     </Link>
                                 </li>
                                 <li onClick={()=> setIsNavOpen(false)}>
-                                    <Link href="/features className="nav-link hover:cursor-pointer mb-2 block lg:mr-6 md:mb-0 lg:text-left text-base text-gray-500 font-medium transition-all duration-500 hover:text-gray-900">
+                                    <Link href="/features" className="nav-link hover:cursor-pointer mb-2 block lg:mr-6 md:mb-0 lg:text-left text-base text-gray-500 font-medium transition-all duration-500 hover:text-gray-900">
                                         Features
                                     </Link>
                                 </li>
