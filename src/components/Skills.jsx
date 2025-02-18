@@ -6,12 +6,16 @@ import { motion, AnimatePresence } from "framer-motion";
 const Lottie = dynamic(() => import('react-lottie'), { ssr: false });
 
 const rectangles = [
-  { id: 1, lottieUrl: "https://res.cloudinary.com/dl2adjye7/raw/upload/v1716532587/stack_zrrg4m.json", title: "Skill 1", description: "Description for skill 1" },
-  { id: 2, lottieUrl: "https://res.cloudinary.com/dl2adjye7/raw/upload/v1716532587/stack_zrrg4m.json", title: "Skill 2", description: "Description for skill 2" },
-  { id: 3, lottieUrl: "https://res.cloudinary.com/dl2adjye7/raw/upload/v1716532587/stack_zrrg4m.json", title: "Skill 3", description: "Description for skill 3" },
-  { id: 4, lottieUrl: "https://res.cloudinary.com/dl2adjye7/raw/upload/v1716532587/stack_zrrg4m.json", title: "Skill 4", description: "Description for skill 4" },
-  { id: 5, lottieUrl: "https://res.cloudinary.com/dl2adjye7/raw/upload/v1716532587/stack_zrrg4m.json", title: "Skill 5", description: "Description for skill 5" },
+  { id: 1, lottieUrl: "https://res.cloudinary.com/dl2adjye7/raw/upload/v1716532587/stack_zrrg4m.json", title: "Basics", description: "HTML, CSS, JavaScript" },
+  { id: 2, lottieUrl: "https://res.cloudinary.com/dl2adjye7/raw/upload/v1716532587/stack_zrrg4m.json", title: "Libraries & Frameworks", description: "React.js, Next.js, Node.js, Express.js, Django" },
+  { id: 3, lottieUrl: "https://res.cloudinary.com/dl2adjye7/raw/upload/v1716532587/stack_zrrg4m.json", title: "Styling Tools", description: "Tailwind CSS, Next UI, Shadcn UI, Flowbite" },
+  { id: 4, lottieUrl: "https://res.cloudinary.com/dl2adjye7/raw/upload/v1716532587/stack_zrrg4m.json", title: "Data Management", description: "PostgreSQL, MySQL, Supabase, MongoDB" },
+  { id: 5, lottieUrl: "https://res.cloudinary.com/dl2adjye7/raw/upload/v1716532587/stack_zrrg4m.json", title: "Design & Prototyping", description: "Figma, UI/UX, Canva, Framer" },
+  { id: 6, lottieUrl: "https://res.cloudinary.com/dl2adjye7/raw/upload/v1716532587/stack_zrrg4m.json", title: "Deployment & Hosting", description: "Digital Ocean, Vercel, Namecheap , ahost" },
+  { id: 7, lottieUrl: "https://res.cloudinary.com/dl2adjye7/raw/upload/v1716532587/stack_zrrg4m.json", title: "Version Control", description: "Git, GitHub, GitLab, Bitbucket" },
+  { id: 8, lottieUrl: "https://res.cloudinary.com/dl2adjye7/raw/upload/v1716532587/stack_zrrg4m.json", title: "DevOps & Cloud", description: "Docker" }
 ];
+
 
 const NotifTemplate = ({ lottieUrl, title, description }) => {
   const [animationData, setAnimationData] = useState(null);
@@ -82,11 +86,11 @@ const CardPilling = ({ loop = true }) => {
             return [rectangles[prev.length], ...prev];
           } else {
             clearInterval(interval);
-            setTimeout(() => setTriggerExit(true), 1500);
+            setTimeout(() => setTriggerExit(true), 2000);
             return prev;
           }
         });
-      }, 1000);
+      }, 1500);
 
       return () => clearInterval(interval);
     } else if (loop) {
@@ -124,7 +128,8 @@ const CardPilling = ({ loop = true }) => {
 const Skills = () => {
   return (
 
-      <div className="h-screen mt-24 text-center">
+      <div className="h-screen sm:mt-24 text-center">
+        <h1 className="text-3xl font-bold text-center">Skills</h1>
         <CardPilling />
       </div>
 
