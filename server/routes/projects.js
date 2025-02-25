@@ -17,11 +17,11 @@ router.post('/add', async (req, res) => {
 })
 
 router.put('/update/:id', async (req, res) => {
-    const {name, link} = req.body;
+    const {name, link , technologies} = req.body;
     const {id} = req.params;
     const {data, error} = await supabase
     .from('projects')
-    .update({name, link})
+    .update({name, link , technologies})
     .eq('id', id);
 
     if (error) {
