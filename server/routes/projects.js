@@ -4,10 +4,10 @@ const supabase = require('../config/supabase');
 
 
 router.post('/add', async (req, res) => {
-    const {name , link} = req.body;
+    const {name , link, technologies} = req.body;
     const {data,error} = await supabase
     .from('projects')
-    .insert([{name, link}]);
+    .insert([{name, link , technologies}]);
 
     if (error) {
         return res.status(400).json({error: error.message});
