@@ -1,5 +1,6 @@
     import { verifyToken } from "@/lib/auth";
     import Projects from "@/components/adminPanel/projects";
+    import Blog from "@/components/adminPanel/blog";
 
     export const getServerSideProps = async (context) => {
       console.log("Cookies:", context.req.cookies);
@@ -24,9 +25,9 @@
 
     export default function Dashboard() {
         return (
-             <div className="container mx-auto mt-32">
-              
+             <div className="container flex flex-row gap-20 mx-auto mt-32">
                 <Projects />
+                <Blog />
                 </div>
         );
     } 

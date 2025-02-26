@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 // API base URL
-const API_URL = "http://localhost:5000/api/admin";
+const API_URL = "https://nurbek-codes-9olu.vercel.app/api/admin";
 
 const saveToken = (token, refreshToken) => {
   Cookies.set("accessToken", token, { expires: 1 / 24 }); // 15 daqiqa

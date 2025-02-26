@@ -11,7 +11,7 @@ export default function Navbar() {
 
     return (
         <div>
-            <nav className="py-5 lg:fixed transition-all top-0 left-0 z-50 duration-500 w-full bg-white">
+            <nav className="py-5 lg:fixed transition-all  top-0 left-0 z-50 duration-500 w-full bg-white">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="w-full flex flex-col lg:flex-row">
                         <div className="flex justify-between lg:flex-row">

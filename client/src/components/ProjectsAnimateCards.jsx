@@ -1,62 +1,69 @@
-import React from "react";
-import { render } from "react-dom";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import move from "lodash-move";
+import { getProjects } from "@/actions/projects.action";
 
 const CardTemplate = ({ imageUrl, title, description }) => {
   return (
-    <div className="bg-white shadow-xl rounded-lg p-6 w-96 border ">
+    <div className="bg-white shadow-xl rounded-lg p-6 w-96 border">
       <div className="flex items-center">
-        <img
-          src={imageUrl}
-          alt="Profile"
-          className="w-12 h-12 rounded-full mr-4"
-        />
+        <p>{imageUrl}</p>
         <div className="flex flex-col">
-          <h2 className="text-xl font-bold">{title}</h2>
+          <h2 className="text-xl font-bold">{title || "No title"}</h2>
         </div>
       </div>
-      <p className="mt-4 text-gray-600">{description}</p>
+      <p className="mt-4 text-gray-600 line-clamp-3">{description || "No description"}</p>
     </div>
   );
 };
 
-const CARD_DATA = [
-  {
-    imageUrl: "https://res.cloudinary.com/dl2adjye7/image/upload/v1714420184/1698251861492_e4wiyn.jpg",
-    title: "John Doe",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    imageUrl: "https://res.cloudinary.com/dl2adjye7/image/upload/v1714420184/1698251861492_e4wiyn.jpg",
-    title: "Jane Smith",
-    description: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    imageUrl: "https://res.cloudinary.com/dl2adjye7/image/upload/v1716530846/Kazuhiro_Suda2square_lypqty.jpg",
-    title: "Alice Johnson",
-    description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    imageUrl: "https://res.cloudinary.com/dl2adjye7/image/upload/v1714420184/1698251861492_e4wiyn.jpg",
-    title: "Bernard Hashler",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  // Add more card data as needed
-];
-
-const CARD_OFFSET = 20; // Adjusted for better visibility
-const SCALE_FACTOR = 0.05; // Adjusted for better visibility
+const CARD_OFFSET = 20; // Cardlar o‘rtasidagi masofa
+const SCALE_FACTOR = 0.05; // Cardlar o‘lchamining kamayishi
 
 const CardStack = () => {
-  const [cards, setCards] = React.useState(CARD_DATA);
+  const [cards, setCards] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading holatini qo'shamiz
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await getProjects();
+        console.log("Fetched Projects:", response.data);
+
+        // `response.data` ni tekshirib, massivni olish
+        let projectData = response.data;
+        if (Array.isArray(response.data)) {
+          projectData = response.data; // Agar massiv bo'lsa, to'g'ri ishlatamiz
+        } else if (response.data && Array.isArray(response.data.data)) {
+          projectData = response.data.data; // Agar { data: [...] } bo'lsa, ichki massivni olamiz
+        } else {
+          projectData = []; // Agar hech qanday massiv bo'lmasa, bo'sh massiv qo'yamiz
+        }
+
+        // Faqat to'g'ri ma'lumotlarni filterlaymiz
+        const validCards = projectData.filter(
+          (card) => card && card.name && card.technologies && card.link
+        );
+        setCards(validCards);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+        setCards([]); // Xatolik bo'lsa, bo'sh massiv qo'yamiz
+      } finally {
+        setLoading(false); // Loading tugadi
+      }
+    };
+    fetchData();
+  }, []);
 
   const moveToEnd = (from) => {
     setCards((prevCards) => move(prevCards, from, prevCards.length - 1));
   };
 
+  if (loading) return <div className="text-center mt-48">Loading...</div>; // Loading holati
+
   return (
-    <div style={wrapperStyle} className="mt-48 relative h-96">
+    <div style={wrapperStyle} className="mt-48 relative h-[500px] w-full max-w-4xl mx-auto">
       <ul style={cardWrapStyle}>
         <AnimatePresence>
           {cards.map((card, index) => {
@@ -64,7 +71,7 @@ const CardStack = () => {
 
             return (
               <motion.li
-                key={card.title}
+                key={card.name} // Unikal kalit sifatida `name` ishlatamiz
                 style={{
                   ...cardStyle,
                   cursor: canDrag ? "grab" : "auto",
@@ -93,9 +100,9 @@ const CardStack = () => {
                 onDragEnd={() => moveToEnd(index)}
               >
                 <CardTemplate
-                  imageUrl={card.imageUrl}
-                  title={card.title}
-                  description={card.description}
+                  imageUrl={card.link}
+                  title={card.name}
+                  description={card.technologies}
                 />
               </motion.li>
             );
@@ -103,7 +110,6 @@ const CardStack = () => {
         </AnimatePresence>
       </ul>
     </div>
-
   );
 };
 
@@ -112,24 +118,24 @@ const wrapperStyle = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  height: "30vh",
+  width: "100%",
+  height: "500px", // Karta stacki uchun balandlik oshirildi
 };
 
 const cardWrapStyle = {
   position: "relative",
-  width: "350px",
-  height: "220px",
+  width: "400px", // Karta kengligi oshirildi
+  height: "300px", // Karta balandligi oshirildi
 };
 
 const cardStyle = {
   position: "absolute",
-  width: "350px",
-  height: "220px",
-  borderRadius: "8px",
+  width: "400px", // Karta kengligi oshirildi
+  height: "300px", // Karta balandligi oshirildi
+  borderRadius: "12px", // Radius oshirildi
   transformOrigin: "top center",
   listStyle: "none",
+  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)", // Ko‘rinishni yaxshilash
 };
 
 export default CardStack;
-            
-            

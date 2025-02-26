@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const API_URL = "http://localhost:5000/api/projects";
+const API_URL = "https://nurbek-codes-9olu.vercel.app/api/projects";
 
 const token = Cookies.get("accessToken");
 export const getProjects = async() => {
@@ -28,14 +28,14 @@ export const addProject = async(ProjectData) => {
         throw error;
     }
 }
-export const updateProject = async(id, name, link) => {
+export const updateProject = async(id, ProjectData) => {
     try {
         const response = await axios.put(`${API_URL}/update/${id}`, ProjectData);
         console.log("Update Project Response:", response.data);
-        return response.data;
         if(response.data.message == "Project updated successfully"){
             window.location.reload();
         }
+        return response.data;
     } catch (error) {
         console.error("Update Project Error:", error);
         throw error;
