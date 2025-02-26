@@ -26,7 +26,8 @@ router.get('/blogs', async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });
-// Blog yozuv qo'shish (POST)
+
+// Blog yozuvlarini qo'shish (post)
 router.post('/create', upload.single('image'), async (req, res) => {
     try {
         const { name, description } = req.body;
@@ -49,23 +50,24 @@ router.post('/create', upload.single('image'), async (req, res) => {
         }
 
         // Rasmning URL'sini olish
-        const { data: publicUrl } = supabase.storage.from("blog_images").getPublicUrl(fileName);
+        const { data: publicUrlData } = supabase.storage.from("blog_images").getPublicUrl(fileName);
+        const imageUrl = publicUrlData.publicUrl;
 
         // Ma'lumotlar bazasiga saqlash
         const { data: blogPost, error: dbError } = await supabase
             .from('blog')
-            .insert([{ name, description, image: publicUrl.publicUrl }])
+            .insert([{ name, description, image: imageUrl }])
             .single();
 
         if (dbError) {
             console.log('Database insert error:', dbError);
-            return res.status(500).json({ message: 'Error inserting blog post' });
+            return res.status(500).json({ message: 'Error inserting blog post', error: dbError.message });
         }
 
-        res.status(201).json({message: 'Blog post added successfully'},blogPost);
+        res.status(201).json({ message: 'Blog post added successfully', data: blogPost });
     } catch (error) {
         console.error('Server Error:', error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(500).json({ message: 'Internal Server Error', error: error.message });
     }
 });
 
