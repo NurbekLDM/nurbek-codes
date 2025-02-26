@@ -54,7 +54,7 @@ router.post('/create', upload.single('image'), async (req, res) => {
         // Ma'lumotlar bazasiga saqlash
         const { data: blogPost, error: dbError } = await supabase
             .from('blog')
-            .insert([{ name, description, image_url: publicUrl.publicUrl }])
+            .insert([{ name, description, image: publicUrl.publicUrl }])
             .single();
 
         if (dbError) {
@@ -92,7 +92,7 @@ router.put('/update/:id', upload.single('image'), async (req, res) => {
 
             // Rasmning URL'sini olish
             const { data: publicUrl } = supabase.storage.from("blog_images").getPublicUrl(fileName);
-            updateData.image_url = publicUrl.publicUrl;
+            updateData.image = publicUrl.publicUrl;
         }
 
         // Ma'lumotlar bazasini yangilash
