@@ -8,6 +8,24 @@ const path = require('path');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
+// Blog yozuvlarni olish (GET)
+router.get('/blogs', async (req, res) => {
+    try {
+        const { data: blogPosts, error } = await supabase
+            .from('blog')
+            .select('*');
+
+        if (error) {
+            console.log('Database error:', error);
+            return res.status(500).json({ message: 'Error fetching blog posts' });
+        }
+
+        res.status(200).json(blogPosts);
+    } catch (error) {
+        console.error('Server Error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
 // Blog yozuv qo'shish (POST)
 router.post('/create', upload.single('image'), async (req, res) => {
     try {
@@ -44,7 +62,7 @@ router.post('/create', upload.single('image'), async (req, res) => {
             return res.status(500).json({ message: 'Error inserting blog post' });
         }
 
-        res.status(201).json(blogPost);
+        res.status(201).json({message: 'Blog post added successfully'},blogPost);
     } catch (error) {
         console.error('Server Error:', error);
         res.status(500).json({ message: 'Internal Server Error' });
@@ -89,7 +107,7 @@ router.put('/update/:id', upload.single('image'), async (req, res) => {
             return res.status(500).json({ message: 'Error updating blog post' });
         }
 
-        res.status(200).json(blogPost);
+        res.status(201).json({message: 'Blog post edited successfully'},blogPost);
     } catch (error) {
         console.error('Server Error:', error);
         res.status(500).json({ message: 'Internal Server Error' });
