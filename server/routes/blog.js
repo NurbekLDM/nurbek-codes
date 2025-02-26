@@ -27,7 +27,6 @@ router.get('/blogs', async (req, res) => {
     }
 });
 
-// Blog yozuvlarini qo'shish (post)
 router.post('/create', upload.single('image'), async (req, res) => {
     try {
         const { name, description } = req.body;
@@ -64,7 +63,7 @@ router.post('/create', upload.single('image'), async (req, res) => {
             return res.status(500).json({ message: 'Error inserting blog post', error: dbError.message });
         }
 
-        res.status(201).json({ message: 'Blog post added successfully', data: blogPost });
+        res.status(201).json({ message: 'Blog post added successfully' }); // Bu yerda `data` yo‘q
     } catch (error) {
         console.error('Server Error:', error);
         res.status(500).json({ message: 'Internal Server Error', error: error.message });
