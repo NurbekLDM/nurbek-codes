@@ -2,8 +2,8 @@
 const nextConfig = {
   images: {
     domains: [
-      'gixfxmpgzvlchdemfpsg.supabase.co', // Supabase host nomini qo'shamiz
-      // Agar boshqa domenlar bo'lsa, ularni ham qo'shing
+      'gixfxmpgzvlchdemfpsg.supabase.co', 
+      't.me'
     ],
     remotePatterns: [
       {
