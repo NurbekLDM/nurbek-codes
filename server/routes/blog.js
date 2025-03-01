@@ -108,7 +108,10 @@ router.put('/update/:id', upload.single('image'), async (req, res) => {
             return res.status(500).json({ message: 'Error updating blog post' });
         }
 
-        res.status(201).json({message: 'Blog post edited successfully'},blogPost);
+        res.status(201).json({
+            message: 'Blog post edited successfully',
+            blogPost: blogPost
+        });
     } catch (error) {
         console.error('Server Error:', error);
         res.status(500).json({ message: 'Internal Server Error' });
