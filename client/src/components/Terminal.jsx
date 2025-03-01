@@ -6,7 +6,7 @@ import {
   
   export function TerminalDemo() {
     return (
-<Terminal className="sm:mt-24">
+<Terminal className="overflow-x-hidden sm:mx-0 mx-2 sm:w-full w-screen sm:mt-24">
   <TypingAnimation>&gt; Aliqo'ziyev Nurbek</TypingAnimation>
 
   <AnimatedSpan delay={1500} className="text-green-500">

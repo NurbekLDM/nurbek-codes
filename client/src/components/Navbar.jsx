@@ -16,11 +16,13 @@ export default function Navbar() {
                     <div className="w-full flex flex-col lg:flex-row">
                         <div className="flex justify-between lg:flex-row">
                             <p className="flex hover:cursor-pointer items-center">
+                                <Link href='/'>
                                 <img
                                     className="w-22 h-14"
                                     src="assets/nurbek.svg"
                                     alt="Description"
                                 />
+                                </Link>
                             </p>
                             <button
                                 type="button"
@@ -51,11 +53,7 @@ export default function Navbar() {
                             id="navbar"
                         >
                             <ul className="flex gap-10 lg:items-center lg:justify-center flex-col max-lg:gap-6 max-lg:pt-4 max-lg:mb-4 lg:mt-0 lg:flex-row lg:mx-auto">
-                                <li onClick={()=> setIsNavOpen(false)}>
-                                    <Link href="/" className="nav-link hover:cursor-pointer mb-2 block lg:mr-6 md:mb-0 lg:text-left text-base text-gray-500 font-medium transition-all duration-500 hover:text-gray-900">
-                                        Home
-                                    </Link>
-                                </li>
+                        
                                 <li onClick={()=> setIsNavOpen(false)}>
                                     <Link href="/about" className="nav-link hover:cursor-pointer mb-2 block lg:mr-6 md:mb-0 lg:text-left text-base text-gray-500 font-medium transition-all duration-500 hover:text-gray-900">
                                         About me

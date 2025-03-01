@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { format } from "date-fns";
 import { getBlogs } from "@/actions/blog.action";
+import Head from "next/head";
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
@@ -40,7 +41,7 @@ const Blog = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="flex justify-center sm:pb-0 pb-60  items-center min-h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
       </div>
     );
@@ -55,13 +56,24 @@ const Blog = () => {
   }
 
   return (
-    <div className="container overflow-y-auto h-screen  mx-auto sm:mt-32 px-4 sm:pb-36 pb-32 ">
+    <div>
+    <Head>
+    <title>Blog</title>
+    <meta name="description" content="This is the blog page" />
+    <meta name="keywords" content="blog, blogs, articles, posts" />
+    <meta name="author" content="Nurbek" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
+      
+    <div className="container overflow-y-auto h-screen  mx-auto sm:mt-32 px-4 sm:pb-36  ">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {blogs.map((blog) => (
           <Card key={blog.id} data={blog} />
         ))}
       </div>
     </div>
+    </div>
+    
   );
 };
 

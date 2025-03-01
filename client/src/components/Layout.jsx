@@ -8,9 +8,8 @@ const Layout = ({ children }) => {
     <div className="relative">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Nurbek Aliqo'ziyev</title>
         <meta name="description" content="Nurbek Aliqo'ziyev — tajribali Full-stack dasturchi. React, Node.js, TypeScript va zamonaviy web texnologiyalar bo‘yicha ekspert." />
-        <meta name="keywords" content="Nurbek Aliqo'ziyev, Full-stack Developer, React, Node.js, TypeScript, Web Developer, JavaScript, Frontend Developer, Backend Developer, Software Engineer, Web Development, Programming, UI/UX, API Development, SEO, Next.js, Express.js, PostgreSQL" />
+        <meta name="keywords" content="Nurbek Aliqo'ziyev, Nurbek Aliqoziyev, Nurbek ldm, Nurbek 2005, Nurbek 2255, Nurbek L1GHTDreaM, Web sayt yasash, Sayt yasash, Sayt yasash hizmati, Front-end, Nurbek ,Nurbek Full-stack Developer, React, Node.js, TypeScript, Web Developer, JavaScript, Frontend Developer, Backend Developer, Software Engineer, Web Development, Programming, UI/UX, API Development, SEO, Next.js, Express.js, PostgreSQL" />
         <meta name="author" content="Nurbek Aliqo'ziyev" />
         <meta name="generator" content="Nurbek Aliqo'ziyev" />
         <meta name="robots" content="index, follow" />
@@ -23,6 +22,11 @@ const Layout = ({ children }) => {
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <meta name="apple-mobile-web-app-title" content="Nurbek Aliqo'ziyev" />
         <link rel="apple-touch-icon" href="nurbek-logo.svg" />
+        <link rel="icon" type="image/svg+xml" href="nurbek-logo.svg" />
+        <link rel="mask-icon" href="nurbek-logo.svg" color="#000000" />
+        <link rel="shortcut icon" href="nurbek-logo.svg" />
+        <meta itemprop='image' content='nurbek-logo.svg' />
+        <link rel='icon' type='image/png' sizes='32x32' href='nurbek-logo.svg' />
         <link rel="apple-touch-icon" sizes="57x57" href="nurbek-logo.svg" />
         <link rel="apple-touch-icon" sizes="72x72" href="nurbek-logo.svg" />
         <link rel="apple-touch-icon" sizes="76x76" href="nurbek-logo.svg" />

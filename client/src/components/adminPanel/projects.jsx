@@ -5,7 +5,7 @@ export default function Projects() {
     const [projects, setProjects] = useState([]);
     const [isAddProjectOpen, setIsAddProjectOpen] = useState(false);
     const [isEditProjectOpen, setIsEditProjectOpen] = useState(false);
-    const [editProjectData, setEditProjectData] = useState({ id: "", name: "", link: "", technologies: "" });
+    const [editProjectData, setEditProjectData] = useState({ id: "", name: "", link: "", technologies: "", description: "" });
 
     useEffect(() => {
         const fetchProjects = async () => {
@@ -20,9 +20,10 @@ export default function Projects() {
         const name = e.target[0].value;
         const link = e.target[1].value;
         const technologies = e.target[2].value;
+        const description = e.target[3].value;
 
         try {
-            const project = await addProject({ name, link, technologies });
+            const project = await addProject({ name, link, technologies , description });
             setProjects([...projects, project.data.data]);
             setIsAddProjectOpen(false);
         } catch (error) {
@@ -36,7 +37,8 @@ export default function Projects() {
             const updatedProject = await updateProject(editProjectData.id, {
                 name: editProjectData.name,
                 link: editProjectData.link,
-                technologies: editProjectData.technologies
+                technologies: editProjectData.technologies,
+                description: editProjectData.description
             });
 
             setProjects(projects.map(proj => proj._id === editProjectData.id ? updatedProject.data.data : proj));
@@ -60,7 +62,8 @@ export default function Projects() {
             id: project._id,
             name: project.name,
             link: project.link,
-            technologies: project.technologies || ""
+            technologies: project.technologies || "",
+            description: project.description || ""
         });
         setIsEditProjectOpen(true);
     };
@@ -115,6 +118,7 @@ export default function Projects() {
                             <input type="text" placeholder="Project Name" required className="border p-2 w-full mb-2" />
                             <input type="text" placeholder="Project Link" required className="border p-2 w-full mb-2" />
                             <input type="text" placeholder="Technologies" required className="border p-2 w-full mb-2" />
+                            <input type="text" placeholder="Description" required className="border p-2 w-full mb-2" />
                             <button type="submit" className="bg-blue-700 text-white p-2 rounded-lg w-full">Add</button>
                         </form>
                         <button onClick={() => setIsAddProjectOpen(false)} className="mt-2 text-red-500">Close</button>

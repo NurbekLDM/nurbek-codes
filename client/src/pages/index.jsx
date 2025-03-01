@@ -1,9 +1,22 @@
 import { motion } from "framer-motion";
 import HeroAnimation from "@/components/HeroAnimation";
 import { AnimatedBeamDemo } from "@/components/AnimatedSocial";
+import Head from "next/head";
 
 const Home = () => {
   return (
+    <div>
+      <Head>
+        <title>Nurbek Aliqoziyev</title>
+        <meta
+          name="description"
+          content="Nurbek Aliqoziyev — tajribali Full-stack dasturchi. React, Node.js, TypeScript va zamonaviy web texnologiyalar bo‘yicha ekspert."      />
+        <meta
+          name="keywords"
+          content="Nurbek Aliqoziyev, Full-stack Developer, React, Node.js, TypeScript, Web Developer, JavaScript, Frontend Developer, Backend Developer, Software Engineer, Web Development, Programming, UI/UX, API Development, SEO, Next.js, Express.js, PostgreSQL"
+        />
+        <meta name="author" content="Nurbek Aliqoziyev" />
+      </Head>
     <div className="h-screen text-center  sm:mt-10">
       <section className="bg-white">
         <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
@@ -35,6 +48,7 @@ const Home = () => {
     <AnimatedBeamDemo />
 </div>
       </section>
+    </div>
     </div>
   );
 };
