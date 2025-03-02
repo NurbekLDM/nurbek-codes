@@ -38,7 +38,7 @@ const Layout = ({ children }) => {
         <link rel="canonical" href="https://nurbek.codes" />
         <link rel="manifest" href="manifest.json" />
         <meta property="og:title" content="Nurbek Aliqo'ziyev | Full-stack Developer" />
-        <meta property="og:description" content="Professional Full-stack developer specializing in React, Node.js, and TypeScript." />
+        <meta property="og:description" content="Professional Full-stack developer specializing in React, Next, Node.js, and TypeScript." />
         <meta property="og:image" content="https://nurbek.codes/nurbek-logo.svg" />
         <meta property="og:url" content="https://nurbek.codes/" />
         <meta property="og:site_name" content="Nurbek Aliqo'ziyev" />
