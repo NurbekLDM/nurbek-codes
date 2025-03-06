@@ -5,7 +5,7 @@ export default function Projects() {
     const [projects, setProjects] = useState([]);
     const [isAddProjectOpen, setIsAddProjectOpen] = useState(false);
     const [isEditProjectOpen, setIsEditProjectOpen] = useState(false);
-    const [editProjectData, setEditProjectData] = useState({ id: "", name: "", link: "", technologies: "", description: "" });
+    const [editProjectData, setEditProjectData] = useState({ id: "", name: "", link: "", technologies: "", description: "", github: "" });
 
     useEffect(() => {
         const fetchProjects = async () => {
@@ -21,9 +21,10 @@ export default function Projects() {
         const link = e.target[1].value;
         const technologies = e.target[2].value;
         const description = e.target[3].value;
+        const github = e.target[4].value;
 
         try {
-            const project = await addProject({ name, link, technologies , description });
+            const project = await addProject({ name, link, technologies, description, github });
             setProjects([...projects, project.data.data]);
             setIsAddProjectOpen(false);
         } catch (error) {
@@ -38,7 +39,8 @@ export default function Projects() {
                 name: editProjectData.name,
                 link: editProjectData.link,
                 technologies: editProjectData.technologies,
-                description: editProjectData.description
+                description: editProjectData.description,
+                github: editProjectData.github
             });
 
             setProjects(projects.map(proj => proj._id === editProjectData.id ? updatedProject.data.data : proj));
@@ -63,7 +65,8 @@ export default function Projects() {
             name: project.name,
             link: project.link,
             technologies: project.technologies || "",
-            description: project.description || ""
+            description: project.description || "",
+            github: project.github || "https://github.com/NurbekLDM"
         });
         setIsEditProjectOpen(true);
     };
@@ -80,6 +83,8 @@ export default function Projects() {
                                     <th className="px-4 py-3">Project Name</th>
                                     <th className="px-4 py-3">Link</th>
                                     <th className="px-4 py-3">Technologies</th>
+                                    <th className="px-4 py-3">Description</th>
+                                    <th className="px-4 py-3">GitHub</th>
                                     <th className="px-4 py-3">Action</th>
                                 </tr>
                             </thead>
@@ -94,14 +99,18 @@ export default function Projects() {
                                                 <a target="_blank" href={`https://${project.link}`} rel="noopener noreferrer">View</a>
                                             </td>
                                             <td className="px-4 py-3">{project.technologies}</td>
+                                            <td className="px-4 py-3">{project.description}</td>
+                                            <td className="px-4 py-3">
+                                                <a target="_blank" href={project.github} rel="noopener noreferrer">GitHub</a>
+                                            </td>
                                             <td className="px-4 py-3 flex items-center space-x-2">
                                                 <button onClick={() => openEditModal(project)} className="text-blue-500">Edit</button>
-                                                <button onClick={() => handleDeleteProject(project.id)} className="text-red-500">Delete</button>
+                                                <button onClick={() => handleDeleteProject(project._id)} className="text-red-500">Delete</button>
                                             </td>
                                         </tr>
                                     ))
                                 ) : (
-                                    <tr><td colSpan="4">Loading...</td></tr>
+                                    <tr><td colSpan="6" className="text-center py-4">Loading...</td></tr>
                                 )}
                             </tbody>
                         </table>
@@ -119,6 +128,7 @@ export default function Projects() {
                             <input type="text" placeholder="Project Link" required className="border p-2 w-full mb-2" />
                             <input type="text" placeholder="Technologies" required className="border p-2 w-full mb-2" />
                             <input type="text" placeholder="Description" required className="border p-2 w-full mb-2" />
+                            <input type="text" placeholder="Github Link" required className="border p-2 w-full mb-2" />
                             <button type="submit" className="bg-blue-700 text-white p-2 rounded-lg w-full">Add</button>
                         </form>
                         <button onClick={() => setIsAddProjectOpen(false)} className="mt-2 text-red-500">Close</button>
@@ -153,6 +163,22 @@ export default function Projects() {
                                 placeholder="Technologies" 
                                 value={editProjectData.technologies} 
                                 onChange={(e) => setEditProjectData({...editProjectData, technologies: e.target.value})} 
+                                required 
+                                className="border p-2 w-full mb-2" 
+                            />
+                            <input 
+                                type="text" 
+                                placeholder="Description" 
+                                value={editProjectData.description} 
+                                onChange={(e) => setEditProjectData({...editProjectData, description: e.target.value})} 
+                                required 
+                                className="border p-2 w-full mb-2" 
+                            />
+                            <input 
+                                type="text" 
+                                placeholder="Github Link" 
+                                value={editProjectData.github} 
+                                onChange={(e) => setEditProjectData({...editProjectData, github: e.target.value})} 
                                 required 
                                 className="border p-2 w-full mb-2" 
                             />
