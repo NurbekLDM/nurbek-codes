@@ -28,9 +28,11 @@ export const addProject = async(ProjectData) => {
         throw error;
     }
 }
+
 export const updateProject = async(id, ProjectData) => {
     try {
         const response = await axios.put(`${API_URL}/update/${id}`, ProjectData);
+        
         console.log("Update Project Response:", response.data);
         if(response.data.message == "Project updated successfully"){
             window.location.reload();
@@ -41,6 +43,7 @@ export const updateProject = async(id, ProjectData) => {
         throw error;
     }
 }
+
 export const deleteProject = async(id) => {
     try {
         const response = await axios.delete(`${API_URL}/delete/${id}`);

@@ -6,11 +6,17 @@ export default function Projects() {
     const [isAddProjectOpen, setIsAddProjectOpen] = useState(false);
     const [isEditProjectOpen, setIsEditProjectOpen] = useState(false);
     const [editProjectData, setEditProjectData] = useState({ id: "", name: "", link: "", technologies: "", description: "", github: "" });
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchProjects = async () => {
-            const projects = await getProjects();
-            setProjects(projects.data.data);
+            try {
+                const projects = await getProjects();
+                setProjects(projects.data.data);
+            } catch (error) {
+                console.error("Fetch projects error:", error);
+                setError("Proyektlarni yuklashda xatolik yuz berdi");
+            }
         };
         fetchProjects();
     }, []);
@@ -28,13 +34,18 @@ export default function Projects() {
             setProjects([...projects, project.data.data]);
             setIsAddProjectOpen(false);
         } catch (error) {
-            console.log(error);
+            console.error("Add project error:", error);
+            setError("Proyektni qo'shishda xatolik yuz berdi");
         }
     };
 
     const handleUpdateProject = async (e) => {
         e.preventDefault();
+        
         try {
+            // Bu yerda editProjectData.id ni ishlatamiz
+            console.log("Updating project with ID:", editProjectData.id);
+            
             const updatedProject = await updateProject(editProjectData.id, {
                 name: editProjectData.name,
                 link: editProjectData.link,
@@ -42,11 +53,17 @@ export default function Projects() {
                 description: editProjectData.description,
                 github: editProjectData.github
             });
-
+    
+            console.log("API response:", updatedProject);
+            
+            // O'zgartirilgan proyekt bilan yangilaymiz
             setProjects(projects.map(proj => proj._id === editProjectData.id ? updatedProject.data.data : proj));
             setIsEditProjectOpen(false);
+            setError(null);
         } catch (error) {
-            console.log(error);
+            console.error("Update project error:", error);
+            console.error("Error response:", error.response?.data);
+            setError(`Proyektni yangilashda xatolik: ${error.message || "Noma'lum xato"}`);
         }
     };
 
@@ -54,13 +71,27 @@ export default function Projects() {
         try {
             await deleteProject(id);
             setProjects(projects.filter(project => project._id !== id));
+            setError(null);
         } catch (error) {
-            console.log(error);
+            console.error("Delete project error:", error);
+            setError("Proyektni o'chirishda xatolik yuz berdi");
         }
     };
 
     const openEditModal = (project) => {
+        console.log("Opening edit modal for project:", project);
+        
+
         setEditProjectData({
+            id: project.id,
+            name: project.name,
+            link: project.link,
+            technologies: project.technologies || "",
+            description: project.description || "",
+            github: project.github || "https://github.com/NurbekLDM"
+        });
+        
+        console.log("Edit project data set to:", {
             id: project._id,
             name: project.name,
             link: project.link,
@@ -68,11 +99,18 @@ export default function Projects() {
             description: project.description || "",
             github: project.github || "https://github.com/NurbekLDM"
         });
+        
         setIsEditProjectOpen(true);
     };
 
     return (
         <div>
+            {error && (
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <span className="block sm:inline">{error}</span>
+                </div>
+            )}
+            
             <section className="bg-gray-50 w-fit overflow-y-auto h-screen rounded-xl dark:bg-gray-900 p-3 sm:p-5">
                 <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
                     <button onClick={() => setIsAddProjectOpen(true)} className="bg-blue-600 p-2 text-white rounded-xl">Add project</button>
@@ -83,7 +121,6 @@ export default function Projects() {
                                     <th className="px-4 py-3">Project Name</th>
                                     <th className="px-4 py-3">Link</th>
                                     <th className="px-4 py-3">Technologies</th>
-                                    <th className="px-4 py-3">Description</th>
                                     <th className="px-4 py-3">GitHub</th>
                                     <th className="px-4 py-3">Action</th>
                                 </tr>
@@ -99,13 +136,13 @@ export default function Projects() {
                                                 <a target="_blank" href={`https://${project.link}`} rel="noopener noreferrer">View</a>
                                             </td>
                                             <td className="px-4 py-3">{project.technologies}</td>
-                                            <td className="px-4 py-3">{project.description}</td>
+                                          
                                             <td className="px-4 py-3">
                                                 <a target="_blank" href={project.github} rel="noopener noreferrer">GitHub</a>
                                             </td>
                                             <td className="px-4 py-3 flex items-center space-x-2">
                                                 <button onClick={() => openEditModal(project)} className="text-blue-500">Edit</button>
-                                                <button onClick={() => handleDeleteProject(project._id)} className="text-red-500">Delete</button>
+                                                <button onClick={() => handleDeleteProject(project.id)} className="text-red-500">Delete</button>
                                             </td>
                                         </tr>
                                     ))

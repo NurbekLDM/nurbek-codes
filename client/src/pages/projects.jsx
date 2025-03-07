@@ -129,7 +129,7 @@ const ProjectCard = ({ project }) => {
         <div className="flex gap-3 pt-2 border-t border-gray-200 dark:border-gray-700">
           {github && (
             <a 
-              href={`https://${github}`}
+              href={`${github}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center text-sm font-medium hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
