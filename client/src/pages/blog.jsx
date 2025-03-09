@@ -57,6 +57,7 @@ const Blog = () => {
 
   return (
     <div>
+      <Html>
     <Head>
     <title>Blog</title>
     <meta name="description" content="This is the blog page" />
@@ -72,6 +73,7 @@ const Blog = () => {
         ))}
       </div>
     </div>
+    </Html>
     </div>
     
   );
@@ -87,6 +89,7 @@ const Card = ({ data }) => {
         <Image
           src={data.image} // Supabase Storage URL si
           alt={data.name}
+          loading="lazy"
           fill
           className="object-center object-cover"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

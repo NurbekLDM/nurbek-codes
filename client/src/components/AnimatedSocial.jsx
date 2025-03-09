@@ -106,7 +106,7 @@ export function AnimatedBeamDemo() {
 
 const Icons = {
   telegram: () => (
-    <a href="https://t.me/Nurbek_2255" target="_blank" rel="noreferrer">
+    <a href="https://t.me/Nurbek_2255" aria-label="Telegram " target="_blank" rel="noreferrer">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="25"
@@ -129,6 +129,7 @@ const Icons = {
     <a
     href="https://www.instagram.com/nurbek.ldm"
     target="_blank"
+    aria-label="Instagram"
     rel="noreferrer"
   >
     <svg
@@ -145,7 +146,7 @@ const Icons = {
   </a>
   ),
   whatsapp: () => (
-    <a href="https://github.com/NurbekLDM" target="_blank" rel="noreferrer">
+    <a href="https://github.com/NurbekLDM" aria-label="Github" target="_blank" rel="noreferrer">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="25"
@@ -162,6 +163,7 @@ const Icons = {
       href="https://www.linkedin.com/in/nurbekldm"
       target="_blank"
       rel="noreferrer"
+      aria-label="LinkedIn"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -175,7 +177,7 @@ const Icons = {
     </a>
   ),
   zapier: () => (
-    <a href="https://dev.to/nurbekldm" target="_blank" rel="noopener noreferrer">
+    <a href="https://dev.to/nurbekldm" target="_blank" aria-label="Devto" rel="noopener noreferrer">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="25"
@@ -188,7 +190,7 @@ const Icons = {
     </a>
   ),
   messenger: () => (
-    <a href="https://www.reddit.com/user/Informal_Cream_7895/" target="_blank" rel="noopener noreferrer">
+    <a href="https://www.reddit.com/user/Informal_Cream_7895/" aria-label="reddit" target="_blank" rel="noopener noreferrer">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"

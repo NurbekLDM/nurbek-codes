@@ -6,6 +6,7 @@ import Head from "next/head";
 const Home = () => {
   return (
     <div>
+      <Html>
       <Head>
         <title>Nurbek Aliqoziyev</title>
         <meta
@@ -34,8 +35,9 @@ const Home = () => {
           >
             <motion.img
               src="assets/hero-img.jpeg"
+              loading="lazy"
               alt="mockup"
-              className="rounded-lg shadow-lg w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
+              className="rounded-lg sm:block hidden shadow-lg w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.5 }}
@@ -49,6 +51,8 @@ const Home = () => {
 </div>
       </section>
     </div>
+    
+    </Html>
     </div>
   );
 };
