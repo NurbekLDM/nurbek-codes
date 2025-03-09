@@ -3,10 +3,11 @@ import HeroAnimation from "@/components/HeroAnimation";
 import { AnimatedBeamDemo } from "@/components/AnimatedSocial";
 import Head from "next/head";
 
+
 const Home = () => {
   return (
     <div>
-      <Html>
+
       <Head>
         <title>Nurbek Aliqoziyev</title>
         <meta
@@ -52,7 +53,7 @@ const Home = () => {
       </section>
     </div>
     
-    </Html>
+
     </div>
   );
 };

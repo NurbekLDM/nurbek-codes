@@ -4,8 +4,9 @@ import Head from 'next/head';
 
 const Custom404 = () => {
   return (
+    
     <div className="h-screen flex flex-col items-center justify-center">
-      <Html>
+      
       <Head>
         <title>404 - Page Not Found</title>
         <meta name="description" content="The page you are looking for does not exist." />
@@ -16,8 +17,9 @@ const Custom404 = () => {
       <Link href="/">
         <p className="mt-6 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300">Go back to Home</p>
       </Link>
-      </Html>
+      
     </div>
+    
   );
 };
 

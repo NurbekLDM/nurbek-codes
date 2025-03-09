@@ -56,8 +56,9 @@ const Blog = () => {
   }
 
   return (
-    <div>
-      <Html>
+      
+<div>
+
     <Head>
     <title>Blog</title>
     <meta name="description" content="This is the blog page" />
@@ -73,9 +74,9 @@ const Blog = () => {
         ))}
       </div>
     </div>
-    </Html>
-    </div>
     
+    </div>
+
   );
 };
 

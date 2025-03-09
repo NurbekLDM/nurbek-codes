@@ -69,8 +69,9 @@ const ProjectsSection = () => {
   }
 
   return (
-    <div>
-      <Html>
+
+<div>
+
       <Head>
         <title>Projects</title>
         <meta name="description" content="A collection of projects I have worked on." />
@@ -83,8 +84,9 @@ const ProjectsSection = () => {
       ))}
     </div>
     </div>
-    </Html>
+    
     </div>
+
   );
 };
 

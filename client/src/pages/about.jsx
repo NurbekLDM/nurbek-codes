@@ -20,8 +20,9 @@ export default function AboutPage() {
     }
 
 return (
-  <div>
-    <Html>
+      
+<div>
+
      <Head>
         <title>About me</title>
         <meta name="description" content="This is the about page" />
@@ -35,8 +36,9 @@ return (
     </div>
 
     </div>
-    </Html>
+
 
     </div>
+
 );
 }
