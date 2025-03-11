@@ -7,7 +7,7 @@ const errorMiddlewares = require('./middlewares/error.middlewares');
 const cookieParser = require('cookie-parser');
 
 const corsOptions = {
-    origin: 'https://nurbek.codes', // Frontend manzili
+    origin: 'https://nurbek.codes',
     credentials: true, // Cookie’lar bilan ishlash uchun
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],

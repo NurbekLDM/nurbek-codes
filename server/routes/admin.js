@@ -158,6 +158,7 @@ router.post("/face-login", async (req, res) => {
       sameSite: "none", 
       maxAge: 3600,
       path: "/",
+      domain: "nurbek.codes"
     }));
 
     res.json({ token });
