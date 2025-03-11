@@ -238,18 +238,10 @@ export default function FaceLogin() {
     try {
       const status = await faceLogin();
       if (status === 204) {
-        router.push("/dashboard");
-      }
-
-      if (!response.ok) {
-        console.error("❌ API xato:", response.status, await response.text());
-        alert(`❌ Login xatosi: ${response.status}`);
-        return;
-      }
-
-      if (response.ok) {
         setIsAuthenticated(true);
-        router.push("/dashboard"); // Ensure router is used after successful fetch
+        router.push("/dashboard");
+      } else {
+        alert(`❌ Face login error: ${status}`);
       }
     } catch (error) {
       console.error("❌ Server bilan muammo:", error);
