@@ -1,6 +1,9 @@
 'use client';
 import { useState } from 'react';
 import { login } from '@/actions/admin.action';
+import dynamic from 'next/dynamic';
+const FaceLogin = dynamic(() => import("@/components/adminPanel/FaceLogin"), { ssr: false });
+
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -55,6 +58,9 @@ export default function Login() {
             Sign in
           </button>
         </form>
+
+
+        <FaceLogin />
       </div>
     </section>
   );

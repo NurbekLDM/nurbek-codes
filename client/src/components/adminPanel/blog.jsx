@@ -30,13 +30,13 @@ export default function Blog() {
         e.preventDefault();
         const name = e.target[0].value;
         const description = e.target[1].value;
-        const image = e.target[2].files[0]; // File inputdan file olish
+        const image = e.target[2].files[0]; 
 
         try {
             const blog = await addBlog({ name, description, image });
-            // `data` null bo'lishi mumkin, shuning uchun tekshiruv qo'shamiz
+
             const newBlog = blog.data || null;
-            if (newBlog && newBlog.id) { // Faqat to'g'ri ma'lumotlarni qo'shamiz
+            if (newBlog && newBlog.id) { 
                 setBlogs([...blogs, newBlog]);
             } else {
                 console.warn("New blog data is null or missing ID, not adding to list");
@@ -53,7 +53,7 @@ export default function Blog() {
             const updatedBlog = await updateBlog(editBlogData.id, {
                 name: editBlogData.name,
                 description: editBlogData.description,
-                image: editBlogData.image, // File yoki null
+                image: editBlogData.image, 
             });
             setBlogs(
                 blogs.map((blog) => (blog.id === editBlogData.id ? updatedBlog.data : blog))
@@ -83,10 +83,10 @@ export default function Blog() {
     const openEditModal = (blog) => {
         console.log("Opening edit modal for blog:", blog);
         setEditBlogData({
-            id: blog.id, // `id` ga o'zgartirildi
+            id: blog.id, 
             name: blog.name,
             description: blog.description,
-            image: blog.image, // Backenddan qaytgan image (URL yoki file)
+            image: blog.image, 
         });
         setIsEditBlogOpen(true);
     };
@@ -107,18 +107,18 @@ export default function Blog() {
                         ) : (
                             <div className="flex space-x-4">
                                 {blogs
-                                    .filter((blog) => blog !== null && blog !== undefined) // `null` qiymatlarini filterlaymiz
+                                    .filter((blog) => blog !== null && blog !== undefined) 
                                     .map((blog) => (
                                         <div
                                             key={blog.id}
                                             className="min-w-[300px] bg-white rounded-lg shadow dark:bg-gray-800 p-4"
                                         >
                                             <img
-                                                src={blog.image || "https://via.placeholder.com/300x200"} // `null` bo'lsa, placeholder rasm
+                                                src={blog.image || "https://via.placeholder.com/300x200"} 
                                                 alt={blog.name || "Blog image"}
                                                 className="w-full h-48 object-cover rounded-t-lg mb-2"
                                                 onError={(e) => {
-                                                    e.target.src = "https://via.placeholder.com/300x200"; // Xatolik bo'lsa, placeholder rasm
+                                                    e.target.src = "https://via.placeholder.com/300x200"; 
                                                 }}
                                             />
                                             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
@@ -172,7 +172,7 @@ export default function Blog() {
                                 className="border p-2 w-full mb-2 rounded"
                             />
                             <input
-                                type="file" // File input qo‘shildi
+                                type="file" 
                                 required
                                 className="border p-2 w-full mb-2 rounded"
                             />
@@ -217,7 +217,7 @@ export default function Blog() {
                                 className="border p-2 w-full mb-2 rounded"
                             />
                             <input
-                                type="file" // File input qo‘shildi
+                                type="file" 
                                 onChange={(e) => setEditBlogData({ ...editBlogData, image: e.target.files[0] })}
                                 className="border p-2 w-full mb-2 rounded"
                             />
