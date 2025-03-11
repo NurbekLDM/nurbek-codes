@@ -156,6 +156,7 @@ router.post("/face-login", async (req, res) => {
 
     const isDevelopment = process.env.NODE_ENV === "development";
 
+    // Remove or comment out domain for local testing:
     res.setHeader(
       "Set-Cookie",
       serialize("accessToken", token, {
@@ -164,7 +165,7 @@ router.post("/face-login", async (req, res) => {
         sameSite: "none",
         path: "/",
         maxAge: 3600,
-        domain: "nurbek-codes-9olu.vercel.app",
+        // domain: "nurbek-codes-9olu.vercel.app",
       })
     );
 
