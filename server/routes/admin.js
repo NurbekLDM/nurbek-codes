@@ -148,19 +148,24 @@ router.post("/refresh", async (req, res) => {
 // api/admin/face-login
 router.post("/face-login", async (req, res) => {
   try {
+    const isDevelopment = process.env.NODE_ENV === "development";
+    
     const token = jwt.sign({ user: "face_user" }, JWT_SECRET, { expiresIn: "1h" });
+
     res.setHeader("Set-Cookie", serialize("accessToken", token, {
       httpOnly: true,
       secure: !isDevelopment,
-      sameSite: !isDevelopment? "lax" : "none",
+      sameSite: isDevelopment ? "lax" : "none", 
       maxAge: 3600,
       path: "/",
     }));
+
     res.json({ token });
   } catch (error) {
     console.error("Face login error:", error);
     return res.status(500).json({ error: "Face login error" });
   }
 });
+
 
 module.exports = router;
