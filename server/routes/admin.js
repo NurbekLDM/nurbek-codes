@@ -60,7 +60,7 @@ router.post("/login", async (req, res) => {
   res.setHeader("Set-Cookie", [
     serialize("accessToken", accessToken, {
       httpOnly: true,
-      secure: !isDevelopment,
+      secure: true,
       sameSite: "none",
       maxAge: 3600,
       path: "/",
@@ -68,7 +68,7 @@ router.post("/login", async (req, res) => {
     }), // 1 soat uchun
     serialize("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: !isDevelopment,
+      secure: true,
       sameSite: "none",
       maxAge: 604800,
       path: "/",
@@ -130,7 +130,7 @@ router.post("/refresh", async (req, res) => {
       "Set-Cookie",
       serialize("accessToken", newAccessToken, {
         httpOnly: true,
-        secure: !isDevelopment,
+        secure: true,
         sameSite: "none",
         maxAge: 3600,
         path: "/",
@@ -154,18 +154,15 @@ router.post("/face-login", async (req, res) => {
       expiresIn: "1h",
     });
 
-    const isDevelopment = process.env.NODE_ENV === "development";
-
-    // Remove or comment out domain for local testing:
     res.setHeader(
       "Set-Cookie",
       serialize("accessToken", token, {
         httpOnly: true,
-        secure: !isDevelopment,
+        secure: true,
         sameSite: "none",
         path: "/",
         maxAge: 3600,
-        // domain: "nurbek-codes-9olu.vercel.app",
+        domain: "nurbek-codes-9olu.vercel.app",
       })
     );
 
