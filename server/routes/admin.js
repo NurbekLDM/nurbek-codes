@@ -7,10 +7,9 @@ const jwt = require("jsonwebtoken");
 const { serialize, parse } = require("cookie");
 
 // Token generatsiya qilish uchun maxfiy kalitlar
-const JWT_SECRET =
-  'your-secret-key-for-access-token-1234567890!@#$%^&*';
+const JWT_SECRET = "your-secret-key-for-access-token-1234567890!@#$%^&*";
 const JWT_REFRESH_SECRET =
-'your-secret-key-for-refresh-token-1234567890!@#$%^&*';
+  "your-secret-key-for-refresh-token-1234567890!@#$%^&*";
 
 // Token generatsiya qilish funksiyasi
 const generateAccessToken = (user) => {
@@ -62,7 +61,7 @@ router.post("/login", async (req, res) => {
     serialize("accessToken", accessToken, {
       httpOnly: true,
       secure: !isDevelopment,
-      sameSite: !isDevelopment? "lax" : "none",
+      sameSite: !isDevelopment ? "lax" : "none",
       maxAge: 3600,
       path: "/",
     }), // 1 soat uchun
@@ -148,18 +147,22 @@ router.post("/refresh", async (req, res) => {
 // api/admin/face-login
 router.post("/face-login", async (req, res) => {
   try {
+    const token = jwt.sign({ user: "face_user" }, JWT_SECRET, {
+      expiresIn: "1h",
+    });
 
-    
-    const token = jwt.sign({ user: "face_user" }, JWT_SECRET, { expiresIn: "1h" });
+    const isDevelopment = process.env.NODE_ENV === "development";
 
-    res.setHeader("Set-Cookie", serialize("accessToken", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none", 
-      maxAge: 3600,
-      path: "/",
-      domain: "nurbek.codes"
-    }));
+    res.setHeader(
+      "Set-Cookie",
+      serialize("accessToken", token, {
+        httpOnly: true,
+        secure: !isDevelopment,
+        sameSite: !isDevelopment ? "none" : "lax",
+        path: "/",
+        maxAge: 3600,
+      })
+    );
 
     res.json({ token });
   } catch (error) {
@@ -167,6 +170,5 @@ router.post("/face-login", async (req, res) => {
     return res.status(500).json({ error: "Face login error" });
   }
 });
-
 
 module.exports = router;
