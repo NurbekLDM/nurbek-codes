@@ -154,19 +154,21 @@ router.post("/face-login", async (req, res) => {
       expiresIn: "1h",
     });
 
+    const isDevelopment = process.env.NODE_ENV === "development";
+
     res.setHeader(
       "Set-Cookie",
       serialize("accessToken", token, {
         httpOnly: true,
-        secure: true,
+        secure: !isDevelopment,
         sameSite: "none",
         path: "/",
         maxAge: 3600,
-        domain: "nurbek-codes-9olu.vercel.app",
+        domain: isDevelopment ? "localhost" : "nurbek-codes-9olu.vercel.app",
       })
     );
 
-    res.json({ token });
+    res.status(204).end();
   } catch (error) {
     console.error("Face login error:", error);
     return res.status(500).json({ error: "Face login error" });
