@@ -61,16 +61,18 @@ router.post("/login", async (req, res) => {
     serialize("accessToken", accessToken, {
       httpOnly: true,
       secure: !isDevelopment,
-      sameSite: !isDevelopment ? "lax" : "none",
+      sameSite: "none",
       maxAge: 3600,
       path: "/",
+      domain: "nurbek-codes-9olu.vercel.app",
     }), // 1 soat uchun
     serialize("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: false,
-      sameSite: "strict",
+      secure: !isDevelopment,
+      sameSite: "none",
       maxAge: 604800,
       path: "/",
+      domain: "nurbek-codes-9olu.vercel.app",
     }), // 7 kun uchun
   ]);
 
@@ -128,10 +130,11 @@ router.post("/refresh", async (req, res) => {
       "Set-Cookie",
       serialize("accessToken", newAccessToken, {
         httpOnly: true,
-        secure: false,
+        secure: !isDevelopment,
         sameSite: "none",
         maxAge: 3600,
         path: "/",
+        domain: "nurbek-codes-9olu.vercel.app",
       })
     );
 
@@ -158,7 +161,7 @@ router.post("/face-login", async (req, res) => {
       serialize("accessToken", token, {
         httpOnly: true,
         secure: !isDevelopment,
-        sameSite: !isDevelopment ? "none" : "lax",
+        sameSite: "none",
         path: "/",
         maxAge: 3600,
         domain: "nurbek-codes-9olu.vercel.app",
