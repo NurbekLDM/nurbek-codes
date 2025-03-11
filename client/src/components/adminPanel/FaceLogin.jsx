@@ -219,19 +219,14 @@ export default function FaceLogin() {
         return;
       }
   
-      const data = await response.json();
-      if (data.token) {
-        Cookies.set('token', data.token, { expires: 1 / 24 });
-        setIsAuthenticated(true);
-        router.push('/dashboard');
-      } else {
-        alert('❌ Login amalga oshmadi!');
-      }
+      setIsAuthenticated(true);
+      router.push('/dashboard');
     } catch (error) {
       console.error('❌ Server bilan muammo:', error);
       alert('❌ Server bilan aloqa xatosi');
     }
   }
+  
 
   return (
     <div className='mt-4 text-center'>
