@@ -6,11 +6,17 @@ const adminMiddlewares = require('./middlewares/admin.middlewares');
 const errorMiddlewares = require('./middlewares/error.middlewares');
 const cookieParser = require('cookie-parser');
 
+const corsOptions = {
+    origin: 'https://nurbek.codes', // Frontend manzili
+    credentials: true, // Cookie’lar bilan ishlash uchun
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  };
 
 app.use(cookieParser());
 app.use(express.json());
 const cors = require('cors');
-app.use(cors());
+app.use(cors(corsOptions));
 const helmet = require('helmet');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
