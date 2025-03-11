@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { faceLogin } from "@/actions/admin.action";
 
 export default function FaceLogin() {
   const router = useRouter();
@@ -235,22 +236,9 @@ export default function FaceLogin() {
 
   async function handleLogin() {
     try {
-      const response = await fetch(
-        "https://nurbek-codes-9olu.vercel.app/api/admin/face-login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        }
-      );
-
-      if (response.status === 204) {
-        console.log("✅ Login muvaffaqiyatli, token kutilmaydi");
-        setIsAuthenticated(true);
+      const status = await faceLogin();
+      if (status === 204) {
         router.push("/dashboard");
-        return;
       }
 
       if (!response.ok) {

@@ -127,3 +127,19 @@ export const logout = () => {
   // Foydalanuvchini login sahifasiga yo'naltirish
   window.location.href = "/login";
 };
+
+export const faceLogin = async () => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/face-login`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+    return response.status;
+  } catch (error) {
+    console.error("Face login error:", error);
+    throw error;
+  }
+};
