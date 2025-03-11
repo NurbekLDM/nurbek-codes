@@ -151,9 +151,9 @@ router.post("/face-login", async (req, res) => {
     const token = jwt.sign({ user: "face_user" }, JWT_SECRET, { expiresIn: "1h" });
     res.setHeader("Set-Cookie", serialize("accessToken", token, {
       httpOnly: true,
-      secure: false,
-      sameSite: "none",
-      maxAge: 3600000,
+      secure: !isDevelopment,
+      sameSite: !isDevelopment? "lax" : "none",
+      maxAge: 3600,
       path: "/",
     }));
     res.json({ token });
