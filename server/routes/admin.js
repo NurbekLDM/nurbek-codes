@@ -161,6 +161,7 @@ router.post("/face-login", async (req, res) => {
         sameSite: !isDevelopment ? "none" : "lax",
         path: "/",
         maxAge: 3600,
+        domain: "nurbek-codes-9olu.vercel.app",
       })
     );
 
