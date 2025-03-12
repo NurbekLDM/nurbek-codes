@@ -132,9 +132,12 @@ export const faceLogin = async () => {
   try {
     const response = await axios.post(
       `${API_URL}/face-login`,
-      {},
+      {}, 
       {
-        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true, // Cookie yuborish uchun shart
       }
     );
     return response.status;
@@ -143,3 +146,4 @@ export const faceLogin = async () => {
     throw error;
   }
 };
+
