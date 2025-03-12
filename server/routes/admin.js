@@ -152,7 +152,7 @@ router.post("/refresh", async (req, res) => {
 
     res.cookie("accessToken", token, {
       httpOnly: true,
-      secure: true
+      secure: true,
       sameSite: "None", // Barcha domenlardan ishlashi uchun
       maxAge: 3600000
     });
