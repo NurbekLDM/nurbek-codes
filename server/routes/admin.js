@@ -152,7 +152,7 @@ router.post("/refresh", async (req, res) => {
 
     res.cookie("accessToken", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV !== "development", // HTTPS bo'lsa true
+      secure: true
       sameSite: "None", // Barcha domenlardan ishlashi uchun
       maxAge: 3600000
     });
