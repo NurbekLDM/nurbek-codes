@@ -6,17 +6,15 @@ const adminMiddlewares = require("./middlewares/admin.middlewares");
 const errorMiddlewares = require("./middlewares/error.middlewares");
 const cookieParser = require("cookie-parser");
 
-const corsOptions = {
-  origin: "https://nurbek-codes-9olu.vercel.app",
-  credentials: true, // Cookie’lar bilan ishlash uchun
-  methods: ["GET", "POST", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-};
+
 
 app.use(cookieParser());
 app.use(express.json());
 const cors = require("cors");
-app.use(cors(corsOptions));
+app.use(cors({
+  origin: true,
+  credentials: true,
+}));
 const helmet = require("helmet");
 const morgan = require("morgan");
 const rateLimit = require("express-rate-limit");

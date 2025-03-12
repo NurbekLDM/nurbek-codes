@@ -149,7 +149,14 @@ router.post("/refresh", async (req, res) => {
 router.post("/face-login", async (req, res) => {
   const token = jwt.sign({ user: "face_user" }, JWT_SECRET, { expiresIn: "1h" });
 
-  res.cookie("accessToken", token, {httpOnly: true, maxAge: 3600000});
+
+  res.cookie("accessToken", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV !== "development", // HTTPS bo'lsa true
+    sameSite: "None", // Barcha domenlardan ishlashi uchun
+    maxAge: 3600000
+  });
+  
   res.json({token});
 });
 
