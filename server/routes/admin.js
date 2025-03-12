@@ -7,9 +7,10 @@ const jwt = require("jsonwebtoken");
 const { serialize, parse } = require("cookie");
 
 // Token generatsiya qilish uchun maxfiy kalitlar
-const JWT_SECRET = "your-secret-key-for-access-token-1234567890!@#$%^&*";
+const JWT_SECRET =
+  'your-secret-key-for-access-token-1234567890!@#$%^&*';
 const JWT_REFRESH_SECRET =
-  "your-secret-key-for-refresh-token-1234567890!@#$%^&*";
+'your-secret-key-for-refresh-token-1234567890!@#$%^&*';
 
 // Token generatsiya qilish funksiyasi
 const generateAccessToken = (user) => {
@@ -60,19 +61,17 @@ router.post("/login", async (req, res) => {
   res.setHeader("Set-Cookie", [
     serialize("accessToken", accessToken, {
       httpOnly: true,
-      secure: true,
-      sameSite: "none",
+      secure: !isDevelopment,
+      sameSite: !isDevelopment? "lax" : "none",
       maxAge: 3600,
       path: "/",
-      domain: "nurbek-codes-9olu.vercel.app",
     }), // 1 soat uchun
     serialize("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: true,
-      sameSite: "none",
+      secure: false,
+      sameSite: "strict",
       maxAge: 604800,
       path: "/",
-      domain: "nurbek-codes-9olu.vercel.app",
     }), // 7 kun uchun
   ]);
 
@@ -130,11 +129,10 @@ router.post("/refresh", async (req, res) => {
       "Set-Cookie",
       serialize("accessToken", newAccessToken, {
         httpOnly: true,
-        secure: true,
+        secure: false,
         sameSite: "none",
         maxAge: 3600,
         path: "/",
-        domain: "nurbek-codes-9olu.vercel.app",
       })
     );
 
@@ -149,30 +147,10 @@ router.post("/refresh", async (req, res) => {
 
 // api/admin/face-login
 router.post("/face-login", async (req, res) => {
-  try {
-    const token = jwt.sign({ user: "face_user" }, JWT_SECRET, {
-      expiresIn: "1h",
-    });
+  const token = jwt.sign({ user: "face_user" }, JWT_SECRET, { expiresIn: "1h" });
 
-    const isDevelopment = process.env.NODE_ENV === "development";
-
-    res.setHeader(
-      "Set-Cookie",
-      serialize("accessToken", token, {
-        httpOnly: true,
-        secure: !isDevelopment,
-        sameSite: "none",
-        path: "/",
-        maxAge: 3600,
-        domain: isDevelopment ? "localhost" : "nurbek-codes-9olu.vercel.app",
-      })
-    );
-
-    res.status(204).end();
-  } catch (error) {
-    console.error("Face login error:", error);
-    return res.status(500).json({ error: "Face login error" });
-  }
+  res.cookie("accessToken", token, {httpOnly: true, maxAge: 3600000});
+  res.json({token});
 });
 
 module.exports = router;
