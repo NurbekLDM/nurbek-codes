@@ -162,4 +162,74 @@ router.delete('/delete/:id', async (req, res) => {
     }
 });
 
+router.post('/like', async (req, res) => {
+    try {
+        const { id } = req.body;
+
+        const { data: blogPost, error } = await supabase
+            .from('blog')
+            .select('likes')
+            .eq('id', id)
+            .single();
+
+        if (error) {
+            console.log('Database error:', error);
+            return res.status(500).json({ message: 'Error fetching blog post' });
+        }
+
+        const likes = blogPost.likes + 1;
+
+        const { data: updatedBlogPost, updateError } = await supabase
+            .from('blog')
+            .update({ likes })
+            .eq('id', id)
+            .single();
+
+        if (updateError) {
+            console.log('Database update error:', updateError);
+            return res.status(500).json({ message: 'Error updating blog post' });
+        }
+
+        res.status(200).json({ message: 'Blog post liked successfully', blogPost: updatedBlogPost });
+    } catch (error) {
+        console.error('Server Error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+router.put('/unlike', async (req, res) => {
+    try {
+        const { id } = req.body;
+
+        const { data: blogPost, error } = await supabase
+            .from('blog')
+            .select('likes')
+            .eq('id', id)
+            .single();
+
+        if (error) {
+            console.log('Database error:', error);
+            return res.status(500).json({ message: 'Error fetching blog post' });
+        }
+
+        const likes = blogPost.likes - 1;
+
+        const { data: updatedBlogPost, updateError } = await supabase
+            .from('blog')
+            .update({ likes })
+            .eq('id', id)
+            .single();
+
+        if (updateError) {
+            console.log('Database update error:', updateError);
+            return res.status(500).json({ message: 'Error updating blog post' });
+        }
+
+        res.status(200).json({ message: 'Blog post unliked successfully', blogPost: updatedBlogPost });
+    } catch (error) {
+        console.error('Server Error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
 module.exports = router;
