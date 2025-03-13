@@ -162,7 +162,7 @@ router.delete('/delete/:id', async (req, res) => {
     }
 });
 
-router.post('/like', async (req, res) => {
+router.put('/like', async (req, res) => {
     try {
         const { id } = req.body;
 
