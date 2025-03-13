@@ -12,7 +12,7 @@ app.use(cookieParser());
 app.use(express.json());
 const cors = require("cors");
 app.use(cors({
-  origin: "https://nurbek.codes",
+  origin: true,
   credentials: true,
 }));
 const helmet = require("helmet");
