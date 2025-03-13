@@ -51,7 +51,21 @@ const BlogDetail = () => {
   return (
     <div>
     <Head>
-      <title>{post?.name || "Blog Detail"}</title>
+    <title>{post?.name || "Blog Detail"}</title>
+  <meta name="description" content={post?.description?.slice(0, 150) || "Nurbek Blog"} />
+  
+  {/* Open Graph meta teglar */}
+  <meta property="og:title" content={post?.name} />
+  <meta property="og:description" content={post?.description?.slice(0, 150)} />
+  <meta property="og:image" content={post?.image} />
+  <meta property="og:url" content={`https://nurbek.codes/blog/${post?.id}`} />
+  <meta property="og:type" content="article" />
+
+  {/* Twitter uchun */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={post?.name} />
+  <meta name="twitter:description" content={post?.description?.slice(0, 150)} />
+  <meta name="twitter:image" content={post?.image} />
       </Head>
     <div className="h-screen sm:flex sm:justify-center sm:pb-12 pb-20  overflow-y-auto bg-background">
       {isLoading ? (
