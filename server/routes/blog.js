@@ -27,6 +27,27 @@ router.get('/blogs', async (req, res) => {
     }
 });
 
+router.get('/blog/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { data: blogPost, error } = await supabase
+            .from('blog')
+            .select('*')
+            .eq('id', id)
+            .single();
+
+        if (error) {
+            console.log('Database error:', error);
+            return res.status(500).json({ message: 'Error fetching blog post' });
+        }
+
+        res.status(200).json(blogPost);
+    } catch (error) {
+        console.error('Server Error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
 router.post('/create', upload.single('image'), async (req, res) => {
     try {
         const { name, description } = req.body;
