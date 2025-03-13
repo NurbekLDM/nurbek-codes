@@ -8,6 +8,10 @@ export default {
   ],
   theme: {
   	extend: {
+		fontFamily: {
+			inter: ['Inter', 'sans-serif'],
+			lora: ['Lora', 'serif']
+		  },
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { format } from "date-fns";
 import { getBlogs } from "@/actions/blog.action";
 import Head from "next/head";
+import Link from "next/link";
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
@@ -22,7 +23,7 @@ const Blog = () => {
         }
 
         // Har bir blogning image URL sini tekshirish
-        const validBlogs = response.data.map(blog => ({
+        const validBlogs = response.data.map((blog) => ({
           ...blog,
           image: blog.image || "https://via.placeholder.com/300",
         }));
@@ -56,27 +57,23 @@ const Blog = () => {
   }
 
   return (
-      
-<div>
-
-    <Head>
-    <title>Blog</title>
-    <meta name="description" content="This is the blog page" />
-    <meta name="keywords" content="blog, blogs, articles, posts" />
-    <meta name="author" content="Nurbek" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <div className="h-screen overflow-y-auto">
+      <Head>
+        <title>Blog</title>
+        <meta name="description" content="This is the blog page" />
+        <meta name="keywords" content="blog, blogs, articles, posts" />
+        <meta name="author" content="Nurbek" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      
-    <div className="container overflow-y-auto h-screen  mx-auto sm:mt-32 px-4 sm:pb-36  ">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {blogs.map((blog) => (
-          <Card key={blog.id} data={blog} />
-        ))}
+
+      <div className="container h-full sm:mt-32 px-4 sm:pb-36">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {blogs.map((blog) => (
+            <Card key={blog.id} data={blog} />
+          ))}
+        </div>
       </div>
     </div>
-    
-    </div>
-
   );
 };
 
@@ -89,25 +86,29 @@ const Card = ({ data }) => {
       <div className="relative h-48 w-full">
         <Image
           src={data.image} // Supabase Storage URL si
-          alt={data.name}
+          alt="img"
           loading="lazy"
           fill
           className="object-center object-cover"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          
+          unoptimized={true}
         />
       </div>
 
       {/* Card Content */}
       <div className="p-6">
         <div className="flex items-center justify-between mb-2">
-          <h2 className="text-xl font-bold text-gray-800">{data.name || "Unnamed Blog"}</h2>
+          <h2 className="text-xl font-bold text-gray-800">
+            {data.name || "Unnamed Blog"}
+          </h2>
           <span className="text-xs text-gray-500">{formattedDate}</span>
         </div>
 
-        <p className="text-gray-600 line-clamp-3 mb-4">{data.description || "No description available"}</p>
+        <p className="text-gray-600 line-clamp-3 mb-4">
+          {data.description || "No description available"}
+        </p>
 
-       
+        <Link href={`/blog/${data.id}`}>Read more</Link>
       </div>
     </div>
   );

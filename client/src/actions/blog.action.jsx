@@ -19,6 +19,39 @@ export const getBlogs = async () => {
     }
 };
 
+export const getBlog = async (id) => {
+    try {
+        const response = await axios.get(`${API_URL}/blog/${id}`);
+        console.log("Blog Response:", response.data);
+        return response.data;
+    } catch (error) {
+        console.error("Blog Error:", error);
+        throw error;
+    }
+}
+
+export const likeBlog = async (id) => {
+    try {
+        const response = await axios.put(`${API_URL}/like`, { id });
+        console.log("Like Blog Response:", response.data);
+        return response.data;
+    } catch (error) {
+        console.error("Like Blog Error:", error);
+        throw error;
+    }
+}
+
+export const unlikeBlog = async (id) => {
+    try {
+        const response = await axios.put(`${API_URL}/unlike`, { id });
+        console.log("Unlike Blog Response:", response.data);
+        return response.data;
+    } catch (error) {
+        console.error("Unlike Blog Error:", error);
+        throw error;
+    }
+}
+
 export const addBlog = async (blogData) => {
     try {
         const formData = new FormData();
