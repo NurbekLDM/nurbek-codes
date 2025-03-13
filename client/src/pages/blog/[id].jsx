@@ -53,9 +53,9 @@ const BlogDetail = () => {
     <Head>
       <title>{post?.name || "Blog Detail"}</title>
       </Head>
-    <div className="h-screen sm:flex sm:justify-center  sm:pb-12 pb-20  overflow-y-auto bg-background">
+    <div className="h-screen sm:flex sm:justify-center sm:pb-12 pb-20  overflow-y-auto bg-background">
       {isLoading ? (
-        <div className="container max-w-3xl py-10 space-y-8">
+        <div className="container  max-w-3xl py-10 space-y-8">
           <div className="h-8 w-32 rounded-md bg-muted animate-shimmer bg-[length:500px_100%] bg-[linear-gradient(to_right,theme(colors.muted.DEFAULT)_0%,theme(colors.muted.DEFAULT/50%)_20%,theme(colors.muted.DEFAULT)_40%)]"></div>
           <div className="h-16 w-full rounded-md bg-muted animate-shimmer bg-[length:500px_100%] bg-[linear-gradient(to_right,theme(colors.muted.DEFAULT)_0%,theme(colors.muted.DEFAULT/50%)_20%,theme(colors.muted.DEFAULT)_40%)]"></div>
           <div className="h-8 w-64 rounded-md bg-muted animate-shimmer bg-[length:500px_100%] bg-[linear-gradient(to_right,theme(colors.muted.DEFAULT)_0%,theme(colors.muted.DEFAULT/50%)_20%,theme(colors.muted.DEFAULT)_40%)]"></div>
@@ -63,7 +63,7 @@ const BlogDetail = () => {
         </div>
       ) : (
         post && (
-          <article className="container mb-8  max-w-3xl py-10 space-y-8">
+          <article className="container   max-w-3xl py-10 space-y-8">
             <BlogHeader
               title={post.name}
               author="Nurbek Aliqo'ziyev"
@@ -86,7 +86,7 @@ const BlogDetail = () => {
             />
 
             <div
-              className="flex flex-wrap justify-between items-center gap-4 pt-6 border-t animate-fade-up"
+              className="flex flex-wrap pb-12 justify-between items-center gap-4 pt-6 border-t animate-fade-up"
               style={{ animationDelay: "0.3s" }}
             >
               <LikeButton initialLikes={post.likes || 0} blogId={post.id} />
