@@ -5,10 +5,13 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "prebuild": "echo NEXT_PUBLIC_HONEYBADGER_REVISION=$(git rev-parse --short HEAD) > .env.local",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@honeybadger-io/nextjs": "^5.9.11",
+    "@honeybadger-io/react": "^6.1.26",
     "@tensorflow-models/face-landmarks-detection": "^1.0.6",
     "@tensorflow/tfjs": "^4.22.0",
     "axios": "^1.7.9",

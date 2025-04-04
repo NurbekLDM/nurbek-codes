@@ -36,7 +36,7 @@ const Layout = ({ children }) => {
         <link rel="apple-touch-icon" sizes="152x152" href="nurbek-logo.svg" />
         <link rel="apple-touch-icon" sizes="180x180" href="nurbek-logo.svg" />
         <link rel="canonical" href="https://nurbek.codes" />
-        <link rel="manifest" href="manifest.json" />
+        <link rel="manifest" href="manifest.json" /> 
         <meta property="og:title" content="Nurbek Aliqo'ziyev | MERN-stack Developer" />
         <meta property="og:description" content="Professional MERN-stack developer specializing in React, Next, Node.js, and TypeScript." />
         <meta property="og:image" content="https://nurbek.codes/nurbek-logo.svg" />
