@@ -1,4 +1,3 @@
-const { setupHoneybadger } = require('@honeybadger-io/nextjs')
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
