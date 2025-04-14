@@ -5,8 +5,42 @@ const supabase = require("../config/supabase");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { serialize, parse } = require("cookie");
+const fetch = require("node-fetch");
 
-// Token generatsiya qilish uchun maxfiy kalitlar
+const TELEGRAM_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+
+router.post("/send-message", async (req, res) => {
+  const { name, email, subject, message } = req.body;
+
+  const text = `
+📩 Yangi xabar:
+👤 Ism: ${name}
+📧 Email: ${email}
+📌 Mavzu: ${subject}
+📝 Xabar: ${message}
+`;
+
+  try {
+    await fetch(
+      `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: CHAT_ID,
+          text,
+        }),
+      }
+    );
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error("Telegram xatosi:", error);
+    res.json({ success: false });
+  }
+});
+
 const JWT_SECRET =
   'your-secret-key-for-access-token-1234567890!@#$%^&*';
 const JWT_REFRESH_SECRET =
