@@ -11,13 +11,14 @@ const TELEGRAM_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
 router.post("/send-message", async (req, res) => {
-  const { name, email, subject, message } = req.body;
+  const { name, email, username, subject, message } = req.body;
 
   const text = `
 📩 Yangi xabar:
 👤 Ism: ${name}
 📧 Email: ${email}
 📌 Mavzu: ${subject}
+👤 Foydalanuvchi telegram: ${username}
 📝 Xabar: ${message}
 `;
 
