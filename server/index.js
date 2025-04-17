@@ -11,10 +11,24 @@ const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 app.use(express.json());
 const cors = require("cors");
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://v2-nurbek-codes.vercel.app',
+  'https://nurbek.codes',
+  'https://www.nurbek.codes'
+];
+
 app.use(cors({
-  origin: true,
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
 }));
+
 const helmet = require("helmet");
 const morgan = require("morgan");
 const rateLimit = require("express-rate-limit");
