@@ -13,6 +13,7 @@ app.use(express.json());
 const cors = require("cors");
 const allowedOrigins = [
   'http://localhost:3000',
+  'http://localhost:8080',
   'https://v2-nurbek-codes.vercel.app',
   'https://nurbek.codes',
   'https://www.nurbek.codes'
